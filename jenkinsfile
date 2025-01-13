@@ -3,23 +3,24 @@ pipeline {
 
     parameters {
         string(name: 'NAME', description: 'Please tell me your name?')
-        text(name: 'DESC', description: 'Describe about the job details')
         choice(name: 'MONTH', choices: ['January', 'February', 'Mars', 'April', 'Mai', 'June', 'July', 'August', 'September', 'October', 'November', 'December'], description: 'Choose the month')
     }
 
-    def day
+    environment {
+        day = ''
+    }
     
     stages {
 
         stage('Select Day') {
             steps {
                 script {
-                    day = input(
+                    env.day = input(
                         message: "Enter a valid day for ${params.MONTH}",
                         parameters: [
                             string(name: 'DAY', description: 'Enter the day (1-31)')
                         ]
-                    ) as int
+                    ).toInteger()
         
                     def maxDay
         
@@ -49,8 +50,8 @@ pipeline {
                             break
                     }
         
-                    if (day < 1 || day > maxDay) {
-                        error("Invalid day '${day}' for the selected month '${params.MONTH}'. Please provide a value between 1 and ${maxDay}.")
+                    if (env.day < 1 || env.day > maxDay) {
+                        error("Invalid day '${env.day}' for the selected month '${params.MONTH}'. Please provide a value between 1 and ${maxDay}.")
                     }
                 }
             }
@@ -87,11 +88,11 @@ pipeline {
             steps {
                 script {
 
-                    def suffix = day % 10 == 1 && day != 11 ? "st" :
-                                 day % 10 == 2 && day != 12 ? "nd" :
-                                 day % 10 == 3 && day != 13 ? "rd" : "th"
+                    def suffix = env.day % 10 == 1 && env.day != 11 ? "st" :
+                                 env.day % 10 == 2 && env.day != 12 ? "nd" :
+                                 env.day % 10 == 3 && env.day != 13 ? "rd" : "th"
 
-                    echo "Checking goals for ${params.MONTH}, ${day}${suffix}..."
+                    echo "Checking goals for ${params.MONTH}, ${env.day}${suffix}..."
                     sleep(5)
 
                     switch (params.MONTH) {
@@ -99,15 +100,15 @@ pipeline {
                         case 'January':
 
                             if (params.BUY_DIARY.toBoolean()) {
-                                if (day <= 5) {
+                                if (env.day <= 5) {
                                     echo "Congratulations! You've already bought your diary and you're off to a great start!"
                                 } else {
                                     echo "Well done buying your diary! Better late than never—time to get writing!"
                                 }
                             } else {
-                                if (day < 5) {
+                                if (env.day < 5) {
                                     echo "Don't forget to buy a diary! Starting early will help you achieve your January goal."
-                                } else if (day == 5) {
+                                } else if (env.day == 5) {
                                     echo "It's not too late! Grab a diary today and start your journaling journey."
                                 } else {
                                     echo "A bit behind, aren't we? To achieve your January goal, you need a diary. Time to get one and get started!"
@@ -124,15 +125,15 @@ pipeline {
 
                         case 'February':
                             if (params.DECORATION_THEME.toBoolean()) {
-                                if (day <= 5) {
+                                if (env.day <= 5) {
                                     echo "Congratulations on choosing your decoration theme early! You're on the right track!"
                                 } else {
                                     echo "Great job choosing your decoration theme! A bit late, but better late than never!"
                                 }
                             } else {
-                                if (day < 5) {
+                                if (env.day < 5) {
                                     echo "Don't forget to choose your decoration theme! It's the first step to transforming your space."
-                                } else if (day == 5) {
+                                } else if (env.day == 5) {
                                     echo "It's not too late! Choose your decoration theme today and get started."
                                 } else {
                                     echo "Choosing a decoration theme is essential! Time is flying—get started soon to stay on track!"
@@ -140,15 +141,15 @@ pipeline {
                             }
                       
                             if (params.DECORATION_PURCHASE.toBoolean()) {
-                                if (day <= 15) {
+                                if (env.day <= 15) {
                                     echo "Well done buying your decorations! You're making great progress!"
                                 } else {
                                     echo "Good job purchasing your decorations! It's a bit late, but you can still make it work!"
                                 }
                             } else {
-                                if (day < 15) {
+                                if (env.day < 15) {
                                     echo "Don't forget to buy your decorations! Having them ready will make the process smoother."
-                                } else if (day == 15) {
+                                } else if (env.day == 15) {
                                     echo "It's not too late! Buy your decorations today and you're still on track."
                                 } else {
                                     echo "You haven't bought your decorations yet? Time to hurry—February is slipping away!"
@@ -156,22 +157,21 @@ pipeline {
                             }
                         
                             if (params.DECORATION_HOUSE.toBoolean()) {
-                                if (day <= 25) {
+                                if (env.day <= 25) {
                                     echo "Amazing! Your home is looking fantastic after redecorating—great work!"
                                 } else {
                                     echo "Congratulations on redecorating your home! A bit close to the deadline, but still a success!"
                                 }
                             } else {
-                                if (day < 25) {
+                                if (env.day < 25) {
                                     echo "Don't forget to start redecorating your home! The sooner you begin, the more enjoyable the result."
-                                } else if (day == 25) {
+                                } else if (env.day == 25) {
                                     echo "It's not too late! Start redecorating today!"
                                 } else {
                                     echo "February is almost over, and your home isn't redecorated yet? Time to get moving—there's still time to make a difference!"
                                 }
                             }
                             break
-
                     }
                 }
             }
