@@ -23,13 +23,17 @@ pipeline {
                         ]
                     )
 
+                    def dayInput = inputValue['DAY']
+
                     try {
-                        env.day = inputValue as int
-                        echo(env.day)
+                        env.day = dayInput.toInteger()
 
                         if (env.day < 1 || env.day > 31) {
                             error("Invalid input! Day must be between 1 and 31.")
                         }
+
+                        echo "Day input: ${env.day}"
+
                     } catch (Exception e) {
                         error("Invalid input! Please enter a numeric value for the day.")
                     }
