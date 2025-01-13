@@ -5,10 +5,6 @@ pipeline {
         string(name: 'NAME', description: 'Please tell me your name?')
         choice(name: 'MONTH', choices: ['January', 'February', 'Mars', 'April', 'Mai', 'June', 'July', 'August', 'September', 'October', 'November', 'December'], description: 'Choose the month')
     }
-
-    environment {
-        selectedDay = ''
-    }
     
     stages {
 
@@ -43,8 +39,8 @@ pipeline {
                         choice(name: 'DAY', choices: dayChoices, description: 'Choose the day of the month')
                     ]
 
-                    env.selectedDay = selectedDay
-                    echo "Selected day: ${env.selectedDay} for ${params.MONTH} ${currentYear}"
+                    params.selectedDay = selectedDay
+                    echo "Selected day: ${params.selectedDay} for ${params.MONTH} ${currentYear}"
                 }
             }
         }
@@ -86,7 +82,7 @@ pipeline {
             steps {
                 script {
 
-                    def day = env.selectedDay.toInteger()
+                    def day = params.selectedDay.toInteger()
 
                     def suffix = day % 10 == 1 && day != 11 ? "st" :
                                  day % 10 == 2 && day != 12 ? "nd" :
