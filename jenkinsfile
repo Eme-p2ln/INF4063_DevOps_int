@@ -35,7 +35,7 @@ pipeline {
 
                     if (booleanParams) {
                         currentBuild.description = "Reconfiguring parameters for ${params.MONTH}"
-                        input message: "Fill out the goals for ${params.MONTH}", parameters: booleanParams
+                        input message: "Fill out the goals for ${params.MONTH}", parameters: booleanGoals
                     }
                 }
             }
