@@ -20,7 +20,7 @@ pipeline {
                         parameters: [
                             string(name: 'DAY', description: 'Enter the day (1-31)')
                         ]
-                    ).toInteger()
+                    ) as int
         
                     def maxDay
         
@@ -45,7 +45,7 @@ pipeline {
                             if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) {
                                 maxDay = 29
                             } else {
-                                maxDay = 28 // Année non-bissextile
+                                maxDay = 28 
                             }
                             break
                     }
