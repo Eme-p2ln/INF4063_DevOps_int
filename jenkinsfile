@@ -37,7 +37,6 @@ pipeline {
                         currentBuild.description = "Reconfiguring parameters for ${params.MONTH}"
                         input message: "Fill out the goals for ${params.MONTH}", parameters: booleanGoals
                     }
-                    echo(booleanGoals)
                 }
             }
         }
@@ -59,6 +58,7 @@ pipeline {
 
                         case 'January':
 
+                            echo({params.BUY_DIARY})
                             if (params.BUY_DIARY?.toBoolean()) {
                                 if (day <= 5) {
                                     echo "Congratulations! You've already bought your diary and you're off to a great start!"
