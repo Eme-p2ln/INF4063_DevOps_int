@@ -33,7 +33,7 @@ pipeline {
                             break
                       }
 
-                    if (booleanParams) {
+                    if (booleanGoals) {
                         currentBuild.description = "Reconfiguring parameters for ${params.MONTH}"
                         input message: "Fill out the goals for ${params.MONTH}", parameters: booleanGoals
                     }
