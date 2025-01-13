@@ -9,6 +9,42 @@ pipeline {
     
     stages {
 
+        stage('Select Day') {
+            steps {
+                script {
+                    def currentYear = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR)
+
+                    def isLeapYear = (currentYear % 4 == 0 && (currentYear % 100 != 0 || currentYear % 400 == 0))
+
+                    def daysInMonth = [
+                        'January': 31,
+                        'February': isLeapYear ? 29 : 28,
+                        'March': 31,
+                        'April': 30,
+                        'May': 31,
+                        'June': 30,
+                        'July': 31,
+                        'August': 31,
+                        'September': 30,
+                        'October': 31,
+                        'November': 30,
+                        'December': 31
+                    ]
+                    
+                    def dayChoices = []
+                    for (int day = 1; day <= daysInMonth[params.MONTH]; day++) {
+                        dayChoices.add(day.toString())
+                    }
+                    
+                    def selectedDay = input message: 'Please select a day', parameters: [
+                        choice(name: 'DAY', choices: dayChoices, description: 'Choose the day of the month')
+                    ]
+                    
+                    params.DAY = selectedDay
+                    echo "Selected day: ${params.DAY} for ${params.MONTH} ${currentYear}"
+                }
+            }
+
         stage('Set Goals for the month') {
             steps {
                 script {
