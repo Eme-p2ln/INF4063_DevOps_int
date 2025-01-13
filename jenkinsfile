@@ -1,1 +1,182 @@
+pipeline {
+    agent any
 
+    parameters {
+        string(name: 'NAME', description: 'Please tell me your name?')
+        text(name: 'DESC', description: 'Describe about the job details')
+        choice(name: 'MONTH', choices: ['January', 'February', 'Mars', 'April', 'Mai', 'June', 'July', 'August', 'September', 'October', 'November', 'December'], description: 'Choose the month')
+    }
+
+    def day
+    
+    stages {
+
+        stage('Select Day') {
+            steps {
+                script {
+                    day = input(
+                        message: "Enter a valid day for ${params.MONTH}",
+                        parameters: [
+                            string(name: 'DAY', description: 'Enter the day (1-31)')
+                        ]
+                    ) as int
+        
+                    def maxDay
+        
+                    switch (params.MONTH) {
+                        case 'January':
+                        case 'March':
+                        case 'May':
+                        case 'July':
+                        case 'August':
+                        case 'October':
+                        case 'December':
+                            maxDay = 31
+                            break
+                        case 'April':
+                        case 'June':
+                        case 'September':
+                        case 'November':
+                            maxDay = 30
+                            break
+                        case 'February':
+                            def year = new Date().format('yyyy') as int 
+                            if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) {
+                                maxDay = 29
+                            } else {
+                                maxDay = 28 // Année non-bissextile
+                            }
+                            break
+                    }
+        
+                    if (day < 1 || day > maxDay) {
+                        error("Invalid day '${day}' for the selected month '${params.MONTH}'. Please provide a value between 1 and ${maxDay}.")
+                    }
+                }
+            }
+        }
+
+        stage('Set Goals for the month') {
+            steps {
+                script {
+
+                    def booleanGoals = []
+
+                    switch(params.MONTH) {
+
+                        case 'January':
+                            booleanGoals = [ 
+                                booleanParams(name: "BUY_DIARY", defaultValue: false, description: "Have you bought your diary?"),
+                                booleanParams(name: "QUOTE", defaultValue: false, description: "Have you written a quote that matches your mood?")
+                            ]
+                            break
+
+                        case 'February':
+                            booleanGoals = [ 
+                                booleanParams(name: "DECORATION_THEME", defaultValue: false, description: "Have you chosen your theme?"),
+                                booleanParams(name: "DECORATION_PURCHASE", defaultValue: false, description: "Have you bought the decoration?"),
+                                booleanParams(name: "DECORATION_HOUSE", defaultValue: false, description: "Have you redecorate your house?")
+                            ]
+                            break
+                }
+            }
+        }
+
+        stage('Check Goals for the day') {
+            steps {
+                script {
+
+                    if (day == 3 || day == 23) {
+                        echo "Checking goals for ${params.MONTH}, ${day}rd..."
+                    } else if (day == 2 || day == 22) {
+                        echo "Checking goals for ${params.MONTH}, ${day}nd..."
+                    } else if (day == 1 || day == 21 || day == 31) {
+                        echo "Checking goals for ${params.MONTH}, ${day}st..."
+                    } else {
+                        echo "Checking goals for ${params.MONTH}, ${day}th..."
+                    }
+
+                    switch (params.MONTH) {
+
+                        case 'January':
+
+                            if (params.BUY_DIARY.toBoolean()) {
+                                if (day <= 5) {
+                                    echo "Congratulations! You've already bought your diary and you're off to a great start!"
+                                } else {
+                                    echo "Well done buying your diary! Better late than never—time to get writing!"
+                                }
+                            } else {
+                                if (day < 5) {
+                                    echo "Don't forget to buy a diary! Starting early will help you achieve your January goal."
+                                } else if (day == 5) {
+                                    echo "It's not too late! Grab a diary today and start your journaling journey."
+                                } else {
+                                    echo "A bit behind, aren't we? To achieve your January goal, you need a diary. Time to get one and get started!"
+                                }
+                            }
+
+                            if (params.QUOTE.toBoolean()) {
+                                echo "Great job writing a quote that reflects your mood today! It's a beautiful way to connect with your emotions and express yourself."
+                            } else {
+                                echo "Remember to write a quote that matches your mood today! It's a small yet meaningful step to bring clarity to your thoughts and emotions."
+                            }
+                          
+                            break
+
+                        case 'February':
+                            if (params.DECORATION_THEME.toBoolean()) {
+                                if (selectedDay <= 5) {
+                                    echo "Congratulations on choosing your decoration theme early! You're on the right track!"
+                                } else {
+                                    echo "Great job choosing your decoration theme! A bit late, but better late than never!"
+                                }
+                            } else {
+                                if (selectedDay < 5) {
+                                    echo "Don't forget to choose your decoration theme! It's the first step to transforming your space."
+                                } else if (selectedDay == 5) {
+                                    echo "It's not too late! Choose your decoration theme today and get started."
+                                } else {
+                                    echo "Choosing a decoration theme is essential! Time is flying—get started soon to stay on track!"
+                                }
+                            }
+                      
+                            if (params.DECORATION_PURCHASE.toBoolean()) {
+                                if (selectedDay <= 15) {
+                                    echo "Well done buying your decorations! You're making great progress!"
+                                } else {
+                                    echo "Good job purchasing your decorations! It's a bit late, but you can still make it work!"
+                                }
+                            } else {
+                                if (selectedDay < 15) {
+                                    echo "Don't forget to buy your decorations! Having them ready will make the process smoother."
+                                } else if (selectedDay == 15) {
+                                    echo "It's not too late! Buy your decorations today and you're still on track."
+                                } else {
+                                    echo "You haven't bought your decorations yet? Time to hurry—February is slipping away!"
+                                }
+                            }
+                        
+                            if (params.DECORATION_HOUSE.toBoolean()) {
+                                if (selectedDay <= 25) {
+                                    echo "Amazing! Your home is looking fantastic after redecorating—great work!"
+                                } else {
+                                    echo "Congratulations on redecorating your home! A bit close to the deadline, but still a success!"
+                                }
+                            } else {
+                                if (selectedDay < 25) {
+                                    echo "Don't forget to start redecorating your home! The sooner you begin, the more enjoyable the result."
+                                } else if (selectedDay == 25) {
+                                    echo "It's not too late! Start redecorating today!"
+                                } else {
+                                    echo "February is almost over, and your home isn't redecorated yet? Time to get moving—there's still time to make a difference!"
+                                }
+                            }
+                            break
+
+                    }
+                }
+            }
+        }
+    }
+}
