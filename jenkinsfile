@@ -22,7 +22,7 @@ pipeline {
                         ]
                     )
     
-                    env.day = parmas.DAY.toInteger()
+                    env.day = params.DAY.toInteger()
         
                     def maxDay
         
