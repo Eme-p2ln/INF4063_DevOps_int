@@ -78,6 +78,7 @@ pipeline {
                                 booleanParam(name: "DECORATION_HOUSE", defaultValue: false, description: "Have you redecorate your house?")
                             ]
                             break
+                      }
                 }
             }
         }
