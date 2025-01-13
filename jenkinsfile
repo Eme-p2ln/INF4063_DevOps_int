@@ -15,7 +15,7 @@ pipeline {
         stage('Select Day') {
             steps {
                 script {
-                    
+                
                     def inputValue = input(
                         message: "Enter a valid day for ${params.MONTH}",
                         parameters: [
@@ -23,10 +23,8 @@ pipeline {
                         ]
                     )
 
-                    def dayInput = inputValue['DAY']
-
                     try {
-                        env.day = dayInput.toInteger()
+                        env.day = inputValue.toInteger()
 
                         if (env.day < 1 || env.day > 31) {
                             error("Invalid input! Day must be between 1 and 31.")
