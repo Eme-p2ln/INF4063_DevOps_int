@@ -58,7 +58,7 @@ pipeline {
 
                         case 'January':
 
-                            echo({params.BUY_DIARY})
+                            echo "${params.BUY_DIARY}"
                             if (params.BUY_DIARY?.toBoolean()) {
                                 if (day <= 5) {
                                     echo "Congratulations! You've already bought your diary and you're off to a great start!"
