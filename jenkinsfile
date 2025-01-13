@@ -4,46 +4,10 @@ pipeline {
     parameters {
         string(name: 'NAME', description: 'Please tell me your name?')
         choice(name: 'MONTH', choices: ['January', 'February', 'Mars', 'April', 'Mai', 'June', 'July', 'August', 'September', 'October', 'November', 'December'], description: 'Choose the month')
+        choice(name: 'DAY', choices: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'], description: 'Choose the day accordingly to the month')
     }
     
     stages {
-
-        stage('Select Day') {
-            steps {
-                script {
-                    def currentYear = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR)
-
-                    def isLeapYear = (currentYear % 4 == 0 && (currentYear % 100 != 0 || currentYear % 400 == 0))
-
-                    def daysInMonth = [
-                        'January': 31,
-                        'February': isLeapYear ? 29 : 28,
-                        'March': 31,
-                        'April': 30,
-                        'May': 31,
-                        'June': 30,
-                        'July': 31,
-                        'August': 31,
-                        'September': 30,
-                        'October': 31,
-                        'November': 30,
-                        'December': 31
-                    ]
-                    
-                    def dayChoices = []
-                    for (int day = 1; day <= daysInMonth[params.MONTH]; day++) {
-                        dayChoices.add(day.toString())
-                    }
-                    
-                    def selectedDay = input message: 'Please select a day', parameters: [
-                        choice(name: 'DAY', choices: dayChoices, description: 'Choose the day of the month')
-                    ]
-
-                    params.selectedDay = selectedDay
-                    echo "Selected day: ${params.selectedDay} for ${params.MONTH} ${currentYear}"
-                }
-            }
-        }
 
         stage('Set Goals for the month') {
             steps {
@@ -82,7 +46,7 @@ pipeline {
             steps {
                 script {
 
-                    def day = params.selectedDay.toInteger()
+                    def day = params.DAY.toInteger()
 
                     def suffix = day % 10 == 1 && day != 11 ? "st" :
                                  day % 10 == 2 && day != 12 ? "nd" :
