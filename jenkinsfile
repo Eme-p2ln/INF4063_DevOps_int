@@ -7,7 +7,7 @@ pipeline {
     }
 
     environment {
-        day = ''
+        day = ""
     }
     
     stages {
@@ -24,7 +24,8 @@ pipeline {
                     )
 
                     try {
-                        env.day = inputValue.toInteger()
+                        env.day = inputValue as int
+                        echo(env.day)
 
                         if (env.day < 1 || env.day > 31) {
                             error("Invalid input! Day must be between 1 and 31.")
