@@ -40,8 +40,7 @@ pipeline {
                         choice(name: 'DAY', choices: dayChoices, description: 'Choose the day of the month')
                     ]
                     
-                    params.DAY = selectedDay
-                    echo "Selected day: ${params.DAY} for ${params.MONTH} ${currentYear}"
+                    echo "Selected day: ${selectedDay} for ${params.MONTH} ${currentYear}"
                 }
             }
         }
@@ -83,7 +82,7 @@ pipeline {
             steps {
                 script {
 
-                    def day = params.DAY.toInteger()
+                    def day = selectedDay.toInteger()
 
                     def suffix = day % 10 == 1 && day != 11 ? "st" :
                                  day % 10 == 2 && day != 12 ? "nd" :
