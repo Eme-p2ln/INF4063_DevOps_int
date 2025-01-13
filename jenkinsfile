@@ -19,20 +19,20 @@ pipeline {
 
                         case 'January':
                             booleanGoals = [ 
-                                [$class: 'BooleanParameterDefinition', name: "BUY_DIARY", description: "Have you bought your diary?"],
-                                [$class: 'BooleanParameterDefinition', name: "QUOTE", description: "Have you written a quote that matches your mood?"]
+                                booleanParam(name: "BUY_DIARY", description: "Have you bought your diary?"),
+                                booleanParam(name: "QUOTE", description: "Have you written a quote that matches your mood?")
                             ]
                             break
 
                         case 'February':
                             booleanGoals = [ 
-                                [$class: 'BooleanParameterDefinition', name: "DECORATION_THEME", description: "Have you chosen your theme?"],
-                                [$class: 'BooleanParameterDefinition', name: "DECORATION_PURCHASE", description: "Have you bought the decoration?"],
-                                [$class: 'BooleanParameterDefinition', name: "DECORATION_HOUSE", description: "Have you redecorate your house?"]
+                                booleanParam(name: "DECORATION_THEME", description: "Have you chosen your theme?"),
+                                booleanParam(name: "DECORATION_PURCHASE", description: "Have you bought the decoration?"),
+                                booleanParam(name: "DECORATION_HOUSE", description: "Have you redecorate your house?")
                             ]
                             break
-                      }
-
+                    }
+    
                     if (booleanGoals) {
                         currentBuild.description = "Reconfiguring parameters for ${params.MONTH}"
                         input message: "Fill out the goals for ${params.MONTH}", parameters: booleanGoals
