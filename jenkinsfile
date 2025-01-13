@@ -15,14 +15,23 @@ pipeline {
         stage('Select Day') {
             steps {
                 script {
+                    
                     def inputValue = input(
                         message: "Enter a valid day for ${params.MONTH}",
                         parameters: [
-                            string(name: 'DAY', description: 'Enter the day (1-31)')
+                            string(name: 'DAY', description: 'Enter the day (1-31)', defaultValue: '1')
                         ]
                     )
-    
-                    env.day = params.DAY.toInteger()
+
+                    try {
+                        env.day = inputValue.toInteger()
+
+                        if (env.day < 1 || env.day > 31) {
+                            error("Invalid input! Day must be between 1 and 31.")
+                        }
+                    } catch (Exception e) {
+                        error("Invalid input! Please enter a numeric value for the day.")
+                    }
         
                     def maxDay
         
