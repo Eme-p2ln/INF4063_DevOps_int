@@ -58,7 +58,7 @@ pipeline {
 
                         case 'January':
 
-                            if (params.BUY_DIARY?) {
+                            if (params.BUY_DIARY?.toBoolean()) {
                                 if (day <= 5) {
                                     echo "Congratulations! You've already bought your diary and you're off to a great start!"
                                 } else {
@@ -74,7 +74,7 @@ pipeline {
                                 }
                             }
 
-                            if (params.QUOTE?) {
+                            if (params.QUOTE?.toBoolean()) {
                                 echo "Great job writing a quote that reflects your mood today! It's a beautiful way to connect with your emotions and express yourself."
                             } else {
                                 echo "Remember to write a quote that matches your mood today! It's a small yet meaningful step to bring clarity to your thoughts and emotions."
@@ -83,7 +83,7 @@ pipeline {
                             break
 
                         case 'February':
-                            if (params.DECORATION_THEME?) {
+                            if (params.DECORATION_THEME?.toBoolean()) {
                                 if (day <= 5) {
                                     echo "Congratulations on choosing your decoration theme early! You're on the right track!"
                                 } else {
@@ -99,7 +99,7 @@ pipeline {
                                 }
                             }
                       
-                            if (params.DECORATION_PURCHASE?) {
+                            if (params.DECORATION_PURCHASE?.toBoolean()) {
                                 if (day <= 15) {
                                     echo "Well done buying your decorations! You're making great progress!"
                                 } else {
@@ -115,7 +115,7 @@ pipeline {
                                 }
                             }
                         
-                            if (params.DECORATION_HOUSE?) {
+                            if (params.DECORATION_HOUSE?.toBoolean()) {
                                 if (day <= 25) {
                                     echo "Amazing! Your home is looking fantastic after redecorating—great work!"
                                 } else {
