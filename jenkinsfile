@@ -44,6 +44,7 @@ pipeline {
                     echo "Selected day: ${params.DAY} for ${params.MONTH} ${currentYear}"
                 }
             }
+        }
 
         stage('Set Goals for the month') {
             steps {
