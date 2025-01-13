@@ -15,29 +15,10 @@ pipeline {
         stage('Select Day') {
             steps {
                 script {
-                
-                    def inputValue = input(
-                        message: "Enter a valid day for ${params.MONTH}",
-                        parameters: [
-                            string(name: 'DAY', description: 'Enter the day (1-31)', defaultValue: '1')
-                        ]
-                    )
 
-                    try {
-                        env.day = inputValue.toInteger()
-
-                        if (env.day < 1 || env.day > 31) {
-                            error("Invalid input! Day must be between 1 and 31.")
-                        }
-
-                        echo "Day input: ${env.day}"
-
-                    } catch (Exception e) {
-                        error("Invalid input! Please enter a numeric value for the day.")
-                    }
-        
+                    def validDays = []
                     def maxDay
-        
+
                     switch (params.MONTH) {
                         case 'January':
                         case 'March':
@@ -63,9 +44,24 @@ pipeline {
                             }
                             break
                     }
-        
+
+                    for (int i = 1; i <= maxDay; i++) {
+                        validDays.add(i.toString())  
+                    }
+
+                    def inputValue = input(
+                        message: "Select a valid day for ${params.MONTH}",
+                        parameters: [
+                            choice(name: 'DAY', choices: validDays, description: 'Select the day (1-31)')
+                        ]
+                    )
+
+                    env.day = inputValue.toInteger()
+
+                    echo "Selected Day: ${env.day}"
+
                     if (env.day < 1 || env.day > maxDay) {
-                        error("Invalid day '${env.day}' for the selected month '${params.MONTH}'. Please provide a value between 1 and ${maxDay}.")
+                        error("Invalid day '${env.day}' for the selected month '${params.MONTH}'. Please select a valid day.")
                     }
                 }
             }
