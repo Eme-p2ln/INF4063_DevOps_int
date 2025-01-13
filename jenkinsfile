@@ -19,16 +19,16 @@ pipeline {
 
                         case 'January':
                             booleanGoals = [ 
-                                booleanParam(name: "BUY_DIARY", defaultValue: false, description: "Have you bought your diary?"),
-                                booleanParam(name: "QUOTE", defaultValue: false, description: "Have you written a quote that matches your mood?")
+                                booleanParam($class: 'BooleanParameterDefinition', name: "BUY_DIARY", defaultValue: false, description: "Have you bought your diary?"),
+                                booleanParam($class: 'BooleanParameterDefinition', name: "QUOTE", defaultValue: false, description: "Have you written a quote that matches your mood?")
                             ]
                             break
 
                         case 'February':
                             booleanGoals = [ 
-                                booleanParam(name: "DECORATION_THEME", defaultValue: false, description: "Have you chosen your theme?"),
-                                booleanParam(name: "DECORATION_PURCHASE", defaultValue: false, description: "Have you bought the decoration?"),
-                                booleanParam(name: "DECORATION_HOUSE", defaultValue: false, description: "Have you redecorate your house?")
+                                booleanParam($class: 'BooleanParameterDefinition', name: "DECORATION_THEME", defaultValue: false, description: "Have you chosen your theme?"),
+                                booleanParam($class: 'BooleanParameterDefinition', name: "DECORATION_PURCHASE", defaultValue: false, description: "Have you bought the decoration?"),
+                                booleanParam($class: 'BooleanParameterDefinition', name: "DECORATION_HOUSE", defaultValue: false, description: "Have you redecorate your house?")
                             ]
                             break
                       }
