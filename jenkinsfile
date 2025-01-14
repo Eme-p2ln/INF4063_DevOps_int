@@ -63,6 +63,13 @@ pipeline {
                             ]
                             break
 
+                        case 'July':
+                            booleanGoals = [ 
+                                booleanParam(name: "VIEILLES_CHARRUES", description: "Have you been to Les Vieilles Charrues festival?"),
+                                booleanParam(name: "ORCHESTRA_CONCERT", description: "Have you been to the concert by your old orchestra?")
+                            ]
+                            break
+
                     }
     
                     if (booleanGoals) {
@@ -292,6 +299,45 @@ pipeline {
                                     echo "Last chance! Bake with your Grandma today and create some wonderful memories together."
                                 } else {
                                     echo "It’s no longer possible to bake with Grandma this June. Don’t miss the chance to spend time with her next time!"
+                                }
+                            }
+                            break
+
+                        case 'July':
+
+                            if (params.VIEILLES_CHARRUES.toBoolean()) {
+                                if (day < 17) {
+                                    echo "Congratulations for reserving your place in advance for Les Vieilles Charrues!"
+                                } else if (day == 17) {
+                                    echo "Have fun at Les Vieilles Charrues! Enjoy the festival!"
+                                } else {
+                                    echo "Hope you had an amazing time at Les Vieilles Charrues!"
+                                }
+                            } else {
+                                if (day < 17) {
+                                    echo "Don't forget to reserve your place for Les Vieilles Charrues! It’s going to be an unforgettable event."
+                                } else if (day == 17) {
+                                    echo "It's today—last chance to go to Les Vieilles Charrues!"
+                                } else {
+                                    echo "It's no longer possible to attend Les Vieilles Charrues this year. Maybe next year!"
+                                }
+                            }
+                        
+                            if (params.ORCHESTRA_CONCERT.toBoolean()) {
+                                if (day < 6) {
+                                    echo "Congratulations for reserving your place in advance for your old orchestra concert!"
+                                } else if (day == 6) {
+                                    echo "Have fun at the orchestra concert! Enjoy the beautiful music!"
+                                } else {
+                                    echo "Hope you enjoyed the concert by your old orchestra!"
+                                }
+                            } else {
+                                if (day < 6) {
+                                    echo "Don't forget to reserve your place for the orchestra concert! It’ll be a great event."
+                                } else if (day == 6) {
+                                    echo "It's today—last chance to attend your orchestra concert!"
+                                } else {
+                                    echo "It's no longer possible to attend the orchestra concert this year. Maybe next time!"
                                 }
                             }
                             break
