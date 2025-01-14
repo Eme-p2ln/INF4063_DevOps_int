@@ -34,7 +34,7 @@ pipeline {
 
                         case 'March':
                             booleanGoals = [ 
-                                booleanParam(name: "20_KM", description: "Have you run your 20 km?"),
+                                booleanParam(name: "TWENTY_KM", description: "Have you run your 20 km?"),
                                 booleanParam(name: "GYM", description: "Have you signed up for the gym?"),
                                 booleanParam(name: "YOGA", description: "Have you signed up for yoga classes?")
                             ]
@@ -143,7 +143,7 @@ pipeline {
                             break
 
                         case 'March':
-                            if (params.20_KM.toBoolean()) {
+                            if (params.TWENTY_KM.toBoolean()) {
                                 echo "Congratulations on running 20 km this month! Your dedication to fitness is inspiring!"
                                 def progress = 100 
                                 echo "Progress: |" + "=".repeat(progress / 10) + "| ${progress}%"
