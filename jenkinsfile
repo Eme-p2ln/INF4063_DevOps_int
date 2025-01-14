@@ -186,11 +186,10 @@ pipeline {
                             }
 
                             if (params.TWENTY_KM?.toBoolean()) {
-                                echo "Congratulations on running 20 km this month! Your dedication to fitness is inspiring!"
                                 def progress = 100 
                                 echo "Progress: ${progressBar(progress as int)}"
+                                echo "Congratulations on running 20 km this month! Your dedication to fitness is inspiring!"
                             } else {
-                                echo "You're on your way to completing the 20 km goal! Keep running—March isn't over yet!"
                                 def completedDistance = input(
                                     message: "Enter the distance you've run so far (in km):",
                                     parameters: [
@@ -200,6 +199,11 @@ pipeline {
                                 def totalDistance = 20
                                 def progress = (completedDistance / totalDistance) * 100
                                 echo "Progress: ${progressBar(progress as int)}"
+                                if (progress != '0'){
+                                    echo "You're on your way to completing the 20 km goal! Keep running—March isn't over yet!"
+                                } else {
+                                    echo "It's not too late to start! Motivation is the key."
+                                }
                             }
                         
                             if (params.GYM?.toBoolean()) {
@@ -448,11 +452,10 @@ pipeline {
                             }
                         
                             if (params.KUBERNETES?.toBoolean()) {
-                                echo "Congratulations on mastering Kubernetes! You're now a container orchestration pro!"
                                 def progress = 100
                                 echo "Progress: ${progressBar(progress)}"
+                                echo "Congratulations on mastering Kubernetes! You're now a container orchestration pro!"
                             } else {
-                                echo "You're on your way to mastering Kubernetes! Keep learning—it’s a valuable skill."
                                 def completedModules = input(
                                     message: "Enter the number of Kubernetes modules you've completed so far (max.: 20):",
                                     parameters: [
@@ -462,14 +465,18 @@ pipeline {
                                 def totalModules = 20 
                                 def progress = (completedModules / totalModules) * 100
                                 echo "Progress: ${progressBar(progress as int)}"
+                                if (progress != '0'){
+                                    echo "You're on your way to mastering Kubernetes! Keep learning—it’s a valuable skill."
+                                } else {
+                                    echo "It's not too late to start! Motivation is the key."
+                                }
                             }
                         
                             if (params.INVESTMENTS?.toBoolean()) {
-                                echo "Congratulations on learning how to invest on the stock market! You’re on your way to financial independence."
                                 def progress = 100
                                 echo "Progress: ${progressBar(progress)}"
+                                echo "Congratulations on learning how to invest on the stock market! You’re on your way to financial independence."
                             } else {
-                                echo "You're making progress on learning to invest! Keep going—it’s an important skill for your future."
                                 def completedLessons = input(
                                     message: "Enter the number of investment lessons you've completed so far (max. 16):",
                                     parameters: [
@@ -479,6 +486,11 @@ pipeline {
                                 def totalLessons = 16
                                 def progress = (completedLessons / totalLessons) * 100
                                 echo "Progress: ${progressBar(progress as int)}"
+                                if (progress != '0'){
+                                    echo "You're making progress on learning to invest! Keep going—it’s an important skill for your future."
+                                } else {
+                                    echo "It's not too late to start! Motivation is the key."
+                                }
                             }
                         
                             break
