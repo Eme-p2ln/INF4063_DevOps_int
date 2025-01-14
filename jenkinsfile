@@ -98,6 +98,13 @@ pipeline {
                             ]
                             break
 
+                        case 'December':
+                            booleanGoals = [ 
+                                booleanParam(name: "ZEN", description: "Have you prepared a 'zen' place at home?"),
+                                booleanParam(name: "PLAYLIST", description: "Have you chosen a playlist to accompany these moments of relaxation?")
+                            ]
+                            break
+
                     }
     
                     if (booleanGoals) {
@@ -558,6 +565,33 @@ pipeline {
                         
                             break
 
+                        case 'December':
+                        
+                            if (params.ZEN?.toBoolean()) {
+                                echo "Congratulations! You’ve created a 'zen' place at home. What a great way to start the month!"
+                            } else {
+                                if (day < 5) {
+                                    echo "Don’t forget to prepare a 'zen' place at home! A peaceful space can make all the difference."
+                                } else if (day == 5) {
+                                    echo "It’s not too late! Create your 'zen' place today and bring calm to your December."
+                                } else {
+                                    echo "December is moving fast—don’t miss the chance to create your 'zen' place this year!"
+                                }
+                            }
+                        
+                            if (params.PLAYLIST?.toBoolean()) {
+                                echo "Congratulations! You’ve chosen a playlist to accompany your relaxation moments. Time to unwind!"
+                            } else {
+                                if (day < 5) {
+                                    echo "Don’t forget to choose a playlist to accompany your relaxation moments! Music can set the perfect mood."
+                                } else if (day == 5) {
+                                    echo "It’s not too late! Choose your playlist today and enhance your relaxation time."
+                                } else {
+                                    echo "December is flying by—don’t miss the chance to curate your playlist for relaxation this year!"
+                                }
+                            }
+                        
+                            break
     
                     }
                 }
