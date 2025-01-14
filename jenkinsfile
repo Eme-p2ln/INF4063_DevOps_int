@@ -143,10 +143,16 @@ pipeline {
                             break
 
                         case 'March':
+                            def progressBar = { progress ->
+                                def filled = "=" * (progress / 10 as int)
+                                def empty = " " * (10 - (progress / 10 as int))
+                                return "|${filled}${empty}| ${progress}%"
+                            }
+
                             if (params.TWENTY_KM.toBoolean()) {
                                 echo "Congratulations on running 20 km this month! Your dedication to fitness is inspiring!"
                                 def progress = 100 
-                                echo "Progress: |" + "=".repeat(progress / 10) + "| ${progress}%"
+                                echo "Progress: ${progressBar(progress as int)}"
                             } else {
                                 echo "You're on your way to completing the 20 km goal! Keep running—March isn't over yet!"
                                 def completedDistance = input(
@@ -157,7 +163,7 @@ pipeline {
                                 ) as int
                                 def totalDistance = 20
                                 def progress = (completedDistance / totalDistance) * 100
-                                echo "Progress: |" + "=".repeat(progress / 10 as int) + " ".repeat(10 - (progress / 10 as int)) + "| ${progress as int}%"
+                                echo "Progress: ${progressBar(progress as int)}"
                             }
                         
                             if (params.GYM.toBoolean()) {
