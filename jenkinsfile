@@ -39,6 +39,15 @@ pipeline {
                                 booleanParam(name: "YOGA", description: "Have you signed up for yoga classes?")
                             ]
                             break
+
+                        case 'April':
+                            booleanGoals = [ 
+                                booleanParam(name: "VOLUNTEER", description: "Have you volunteered this month?"),
+                                booleanParam(name: "POST-IT", description: "Have you put kind post-it on the desk of your colleagues to brighten their day?"),
+                                booleanParam(name: "BOUQUET", description: "Have you made a bouquet of wild flowers for your parents?")
+                            ]
+                            break
+
                     }
     
                     if (booleanGoals) {
@@ -143,6 +152,7 @@ pipeline {
                             break
 
                         case 'March':
+
                             def progressBar = { progress ->
                                 def filled = "=" * (progress / 10 as int)
                                 def empty = " " * (10 - (progress / 10 as int))
@@ -198,6 +208,49 @@ pipeline {
                                 }
                             }
                             break
+
+                        case 'April':
+
+                            if (params.VOLUNTEER.toBoolean()) {
+                                echo "Amazing! You've volunteered this month. Thank you for making a difference!"
+                            } else {
+                                echo "Remember to volunteer this month! Helping others is a great way to spread kindness and make an impact."
+                            }
+                        
+                            if (params.POST_IT.toBoolean()) {
+                                if (day <= 22) {
+                                    echo "Wonderful! You've brightened someone's day by leaving a kind post-it. Such a thoughtful gesture!"
+                                } else {
+                                    echo "Great job putting up a kind post-it, even if it's a little late. Better late than never to spread positivity!"
+                                }
+                            } else {
+                                if (day < 22) {
+                                    echo "Don't forget to leave a kind post-it on your colleagues' desks! It’s a small action that can bring big smiles."
+                                } else if (day == 22) {
+                                    echo "It's not too late! Leave a kind post-it today to brighten someone’s day."
+                                } else {
+                                    echo "April is almost over, but there's still time to spread kindness with a post-it note!"
+                                }
+                            }
+                        
+                            if (params.BOUQUET.toBoolean()) {
+                                if (day <= 20) {
+                                    echo "Beautiful! You've made a bouquet of wildflowers for your parents. What a lovely gesture!"
+                                } else {
+                                    echo "Great job making a bouquet of wildflowers for your parents, even if it's a little late. They must have loved it!"
+                                }
+                            } else {
+                                if (day < 20) {
+                                    echo "Don’t forget to gather wildflowers and create a bouquet for your parents. It’s a thoughtful way to show love."
+                                } else if (day == 20) {
+                                    echo "It’s not too late! Make a bouquet today and surprise your parents with a beautiful gesture."
+                                } else {
+                                    echo "The month is nearly over—don’t miss the chance to make a bouquet of wildflowers for your parents!"
+                                }
+                            }
+                            break
+
+    
                     }
                 }
             }
