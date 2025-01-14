@@ -143,7 +143,7 @@ pipeline {
                             break
 
                         case 'March':
-                            if (params.TWENTY_KM.toBoolean()) {
+                            if (params.20_KM.toBoolean()) {
                                 echo "Congratulations on running 20 km this month! Your dedication to fitness is inspiring!"
                                 def progress = 100 
                                 echo "Progress: |" + "=".repeat(progress / 10) + "| ${progress}%"
