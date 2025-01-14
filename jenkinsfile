@@ -91,6 +91,13 @@ pipeline {
                             ]
                             break
 
+                        case 'November':
+                            booleanGoals = [ 
+                                booleanParam(name: "UKULELE", description: "Have you bought a ukulele?"),
+                                booleanParam(name: "CHORDS", description: "Have you mastered the 4 chords G M, D M, E m, and C M?")
+                            ]
+                            break
+
                     }
     
                     if (booleanGoals) {
@@ -491,6 +498,49 @@ pipeline {
                                 } else {
                                     echo "It's not too late to start! Motivation is the key."
                                 }
+                            }
+                        
+                            break
+
+                        case 'November':
+
+                            if (params.UKULELE?.toBoolean()) {
+                                echo "Congratulations! You bought your ukulele and you're off to a great start!"
+                            } else {
+                                if (day < 5) {
+                                    echo "Don't forget to buy a ukulele! Starting early will help you achieve your November goal."
+                                } else if (day == 5) {
+                                    echo "It's not too late! Grab a ukulele today and start your musical journey."
+                                } else {
+                                    echo "A bit behind, aren't we? To achieve your November goal, you need a ukulele. Time to get one and get started!"
+                                }
+                            }
+
+                            def progressBar = { progress ->
+                                def filled = "=" * (progress / 10 as int)
+                                def empty = " " * (10 - (progress / 10 as int))
+                                return "|${filled}${empty}| ${progress}%"
+                            }
+                        
+                            if (params.CHORDS?.toBoolean()) {
+                                if (!params.UKULELE?.toBoolean()) {
+                                    echo "Have you been practicing on another instrument? Keep going, but don’t forget to get a ukulele!"
+                                } else {
+                                    echo "Congratulations on mastering the four chords G M, D M, E m, and C M! You're ready to play some great tunes!"
+                                    def progress = 100
+                                    echo "Progress: ${progressBar(progress)}"
+                                }
+                            } else {
+                                echo "You're on your way to mastering the chords! Keep practicing—it’s all about consistency."
+                                def completedChords = input(
+                                    message: "Enter the number of chords you've mastered so far (out of 4):",
+                                    parameters: [
+                                        string(name: 'COMPLETED_CHORDS', description: 'Number of mastered chords', defaultValue: '0')
+                                    ]
+                                ) as int
+                                def totalChords = 4
+                                def progress = (completedChords / totalChords) * 100
+                                echo "Progress: ${progressBar(progress as int)}"
                             }
                         
                             break
