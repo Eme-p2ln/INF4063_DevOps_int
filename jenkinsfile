@@ -159,7 +159,7 @@ pipeline {
                                 return "|${filled}${empty}| ${progress}%"
                             }
 
-                            if (params.TWENTY_KM.toBoolean()) {
+                            if (params.TWENTY_KM?.toBoolean()) {
                                 echo "Congratulations on running 20 km this month! Your dedication to fitness is inspiring!"
                                 def progress = 100 
                                 echo "Progress: ${progressBar(progress as int)}"
@@ -176,7 +176,7 @@ pipeline {
                                 echo "Progress: ${progressBar(progress as int)}"
                             }
                         
-                            if (params.GYM.toBoolean()) {
+                            if (params.GYM?.toBoolean()) {
                                 if (day <= 5) {
                                     echo "Congratulations on signing up for the gym early! You're taking charge of your fitness goals!"
                                 } else {
@@ -192,7 +192,7 @@ pipeline {
                                 }
                             }
                         
-                            if (params.YOGA.toBoolean()) {
+                            if (params.YOGA?.toBoolean()) {
                                 if (day <= 5) {
                                     echo "Congratulations on signing up for yoga classes early! Time to find your zen and improve flexibility."
                                 } else {
@@ -211,13 +211,13 @@ pipeline {
 
                         case 'April':
 
-                            if (params.VOLUNTEER.toBoolean()) {
+                            if (params.VOLUNTEER?.toBoolean()) {
                                 echo "Amazing! You've volunteered this month. Thank you for making a difference!"
                             } else {
                                 echo "Remember to volunteer this month! Helping others is a great way to spread kindness and make an impact."
                             }
                         
-                            if (params.POST_IT.toBoolean()) {
+                            if (params.POST_IT?.toBoolean()) {
                                 if (day <= 22) {
                                     echo "Wonderful! You've brightened someone's day by leaving a kind post-it. Such a thoughtful gesture!"
                                 } else {
@@ -233,7 +233,7 @@ pipeline {
                                 }
                             }
                         
-                            if (params.BOUQUET.toBoolean()) {
+                            if (params.BOUQUET?.toBoolean()) {
                                 if (day <= 20) {
                                     echo "Beautiful! You've made a bouquet of wildflowers for your parents. What a lovely gesture!"
                                 } else {
