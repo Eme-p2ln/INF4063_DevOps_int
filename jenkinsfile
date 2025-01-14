@@ -43,7 +43,7 @@ pipeline {
                         case 'April':
                             booleanGoals = [ 
                                 booleanParam(name: "VOLUNTEER", description: "Have you volunteered this month?"),
-                                booleanParam(name: "POST-IT", description: "Have you put kind post-it on the desk of your colleagues to brighten their day?"),
+                                booleanParam(name: "POST_IT", description: "Have you put kind post-it on the desk of your colleagues to brighten their day?"),
                                 booleanParam(name: "BOUQUET", description: "Have you made a bouquet of wild flowers for your parents?")
                             ]
                             break
@@ -193,6 +193,7 @@ pipeline {
                                     echo "February is almost over, and your home isn't redecorated yet? Time to get moving—there's still time to make a difference!"
                                 }
                             }
+
                             break
 
                         case 'March':
@@ -247,6 +248,7 @@ pipeline {
                                     echo "March is flying by—don't miss your chance to sign up for yoga classes and achieve your fitness goals!"
                                 }
                             }
+
                             break
 
                         case 'April':
@@ -280,6 +282,7 @@ pipeline {
                                     echo "The month is nearly over and your parents went on vacation—don’t miss the chance to make a bouquet of wildflowers for your Grandma instead!"
                                 }
                             }
+
                             break
 
                         case 'May':
@@ -305,6 +308,7 @@ pipeline {
                                     echo "It’s not too late! Take a road trip this weekend and enjoy the last days of May!"
                                 }
                             }
+
                             break
 
                         case 'June':
@@ -344,6 +348,7 @@ pipeline {
                                     echo "It’s no longer possible to bake with Grandma this June. Don’t miss the chance to spend time with her next time!"
                                 }
                             }
+
                             break
 
                         case 'July':
@@ -383,6 +388,7 @@ pipeline {
                                     echo "It's no longer possible to attend the orchestra concert this year. Maybe next time!"
                                 }
                             }
+
                             break
 
                         case 'August':
@@ -420,6 +426,7 @@ pipeline {
                                     echo "Hope you didn’t freeze too much, but at least it’s a great story to tell!"
                                 }
                             }
+
                             break
 
                         case 'September':
@@ -459,6 +466,7 @@ pipeline {
                                     echo "It's no longer possible to climb Pico Ruivo-your vacation are over. Maybe next time!"
                                 }
                             }
+
                             break
 
                         case 'October':
