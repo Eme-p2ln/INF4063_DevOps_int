@@ -84,6 +84,13 @@ pipeline {
                             ]
                             break
 
+                        case 'October':
+                            booleanGoals = [ 
+                                booleanParam(name: "KUBERNETES", description: "Have you mastered Kubernetes?"),
+                                booleanParam(name: "INVESTMENTS", description: "Have you learnt how to invest money on the stock market?")
+                            ]
+                            break
+
                     }
     
                     if (booleanGoals) {
@@ -430,6 +437,50 @@ pipeline {
                                     echo "It's no longer possible to climb Pico Ruivo-your vacation are over. Maybe next time!"
                                 }
                             }
+                            break
+
+                        case 'October':
+                        
+                            def progressBar = { progress ->
+                                def filled = "=" * (progress / 10 as int)
+                                def empty = " " * (10 - (progress / 10 as int))
+                                return "|${filled}${empty}| ${progress}%"
+                            }
+                        
+                            if (params.KUBERNETES?.toBoolean()) {
+                                echo "Congratulations on mastering Kubernetes! You're now a container orchestration pro!"
+                                def progress = 100
+                                echo "Progress: ${progressBar(progress)}"
+                            } else {
+                                echo "You're on your way to mastering Kubernetes! Keep learning—it’s a valuable skill."
+                                def completedModules = input(
+                                    message: "Enter the number of Kubernetes modules you've completed so far (max.: 20):",
+                                    parameters: [
+                                        string(name: 'COMPLETED_MODULES', description: 'Number of completed modules', defaultValue: '0')
+                                    ]
+                                ) as int
+                                def totalModules = 20 
+                                def progress = (completedModules / totalModules) * 100
+                                echo "Progress: ${progressBar(progress as int)}"
+                            }
+                        
+                            if (params.INVESTMENTS?.toBoolean()) {
+                                echo "Congratulations on learning how to invest on the stock market! You’re on your way to financial independence."
+                                def progress = 100
+                                echo "Progress: ${progressBar(progress)}"
+                            } else {
+                                echo "You're making progress on learning to invest! Keep going—it’s an important skill for your future."
+                                def completedLessons = input(
+                                    message: "Enter the number of investment lessons you've completed so far (max. 16):",
+                                    parameters: [
+                                        string(name: 'COMPLETED_LESSONS', description: 'Number of completed lessons', defaultValue: '0')
+                                    ]
+                                ) as int
+                                def totalLessons = 16
+                                def progress = (completedLessons / totalLessons) * 100
+                                echo "Progress: ${progressBar(progress as int)}"
+                            }
+                        
                             break
 
     
