@@ -3,7 +3,7 @@ pipeline {
 
     parameters {
         string(name: 'NAME', description: 'Please tell me your name?')
-        choice(name: 'MONTH', choices: ['January', 'February', 'Mars', 'April', 'Mai', 'June', 'July', 'August', 'September', 'October', 'November', 'December'], description: 'Choose the month')
+        choice(name: 'MONTH', choices: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'], description: 'Choose the month')
         choice(name: 'DAY', choices: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'], description: 'Choose the day accordingly to the month')
     }
     
@@ -29,6 +29,14 @@ pipeline {
                                 booleanParam(name: "DECORATION_THEME", description: "Have you chosen your theme?"),
                                 booleanParam(name: "DECORATION_PURCHASE", description: "Have you bought the decoration?"),
                                 booleanParam(name: "DECORATION_HOUSE", description: "Have you redecorate your house?")
+                            ]
+                            break
+
+                        case 'March':
+                            booleanGoals = [ 
+                                booleanParam(name: "20_KM", description: "Have you run your 20 km?"),
+                                booleanParam(name: "GYM", description: "Have you signed up for the gym?"),
+                                booleanParam(name: "YOGA", description: "Have you signed up for yoga classes?")
                             ]
                             break
                     }
@@ -84,6 +92,7 @@ pipeline {
                             break
 
                         case 'February':
+
                             if (params.DECORATION_THEME?.toBoolean()) {
                                 if (day <= 5) {
                                     echo "Congratulations on choosing your decoration theme early! You're on the right track!"
@@ -132,7 +141,57 @@ pipeline {
                                 }
                             }
                             break
-                
+
+                        case 'March':
+                            if (params.TWENTY_KM.toBoolean()) {
+                                echo "Congratulations on running 20 km this month! Your dedication to fitness is inspiring!"
+                                def progress = 100 
+                                echo "Progress: |" + "=".repeat(progress / 10) + "| ${progress}%"
+                            } else {
+                                echo "You're on your way to completing the 20 km goal! Keep running—March isn't over yet!"
+                                def completedDistance = input(
+                                    message: "Enter the distance you've run so far (in km):",
+                                    parameters: [
+                                        string(name: 'COMPLETED_DISTANCE', description: 'Distance in kilometers', defaultValue: '0')
+                                    ]
+                                ) as int
+                                def totalDistance = 20
+                                def progress = (completedDistance / totalDistance) * 100
+                                echo "Progress: |" + "=".repeat(progress / 10 as int) + " ".repeat(10 - (progress / 10 as int)) + "| ${progress as int}%"
+                            }
+                        
+                            if (params.GYM.toBoolean()) {
+                                if (day <= 5) {
+                                    echo "Congratulations on signing up for the gym early! You're taking charge of your fitness goals!"
+                                } else {
+                                    echo "Well done signing up for the gym! A bit late, but you're on track now—time to hit those weights!"
+                                }
+                            } else {
+                                if (day < 5) {
+                                    echo "Don't forget to sign up for the gym! Getting started early will make all the difference for your March fitness goal."
+                                } else if (day == 5) {
+                                    echo "It's not too late! Sign up for the gym today and start working on your goals!"
+                                } else {
+                                    echo "Still haven't signed up for the gym? March is moving fast—get to it and crush those fitness goals!"
+                                }
+                            }
+                        
+                            if (params.YOGA.toBoolean()) {
+                                if (day <= 5) {
+                                    echo "Congratulations on signing up for yoga classes early! Time to find your zen and improve flexibility."
+                                } else {
+                                    echo "Great job signing up for yoga classes! A little late, but now you're ready to stretch into success!"
+                                }
+                            } else {
+                                if (day < 5) {
+                                    echo "Don't forget to sign up for yoga classes! Starting early will help you establish a routine."
+                                } else if (day == 5) {
+                                    echo "It's not too late! Sign up for yoga classes today and start your wellness journey."
+                                } else {
+                                    echo "March is flying by—don't miss your chance to sign up for yoga classes and achieve your fitness goals!"
+                                }
+                            }
+                            break
                     }
                 }
             }
