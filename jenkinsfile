@@ -205,7 +205,7 @@ pipeline {
                                 ) as int
                                 def totalDistance = 20
                                 def progress = (completedDistance / totalDistance) * 100
-                                echo "Progress: ${progressBar(progress as int)}"
+                                echo "20 km: ${progressBar(progress as int)}"
                                 if (0 != progress){
                                     echo "You're on your way to completing the 20 km goal! Keep running—March isn't over yet!"
                                 } else {
@@ -460,7 +460,7 @@ pipeline {
                         
                             if (params.KUBERNETES?.toBoolean()) {
                                 def progress = 100
-                                echo "Progress: ${progressBar(progress)}"
+                                echo "Kubernetes modules: ${progressBar(progress)}"
                                 echo "Congratulations on mastering Kubernetes! You're now a container orchestration pro!"
                             } else {
                                 def completedModules = input(
@@ -481,7 +481,7 @@ pipeline {
                         
                             if (params.INVESTMENTS?.toBoolean()) {
                                 def progress = 100
-                                echo "Progress: ${progressBar(progress)}"
+                                echo "Investment lessons: ${progressBar(progress)}"
                                 echo "Congratulations on learning how to invest on the stock market! You’re on your way to financial independence."
                             } else {
                                 def completedLessons = input(
@@ -525,13 +525,15 @@ pipeline {
                             if (params.CHORDS?.toBoolean()) {
                                 if (!params.UKULELE?.toBoolean()) {
                                     echo "Have you been practicing on another instrument? Keep going, but don’t forget to get a ukulele!"
-                                } else {
-                                    echo "Congratulations on mastering the four chords G M, D M, E m, and C M! You're ready to play some great tunes!"
-                                    def progress = 100
-                                    echo "Progress: ${progressBar(progress)}"
-                                }
+                                } 
+                                def progress = 100
+                                echo "Chords: ${progressBar(progress)}"
+                                echo "Congratulations on mastering the four chords G M, D M, E m, and C M! You're ready to play some great tunes!"
+                            
                             } else {
-                                echo "You're on your way to mastering the chords! Keep practicing—it’s all about consistency."
+                                if (!params.UKULELE?.toBoolean()) {
+                                    echo "Have you been practicing on another instrument? Keep going, but don’t forget to get a ukulele!"
+                                } 
                                 def completedChords = input(
                                     message: "Enter the number of chords you've mastered so far (out of 4):",
                                     parameters: [
@@ -541,6 +543,12 @@ pipeline {
                                 def totalChords = 4
                                 def progress = (completedChords / totalChords) * 100
                                 echo "Progress: ${progressBar(progress as int)}"
+                                if (0 != progress){
+                                    echo "You're on your way to mastering the chords! Keep practicing—it’s all about consistency."
+                                } else {
+                                    echo "It's not too late to start! Motivation is the key."
+                                }
+                                
                             }
                         
                             break
