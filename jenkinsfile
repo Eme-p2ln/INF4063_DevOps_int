@@ -149,7 +149,7 @@ pipeline {
                             } else if (!params.QUOTE?.toBoolean() && params.BUY_DIARY?.toBoolean()) {
                                 echo "Remember to write a quote that matches your mood today! It's a small yet meaningful step to bring clarity to your thoughts and emotions."
                             } else if (params.QUOTE?.toBoolean() && !params.BUY_DIARY?.toBoolean()) {
-                                echo "Did you write on a random paper? Writing is the most important so don't give up!"
+                                echo "Did you write on a random paper? Writing is the most important-don't give up!"
                             } else {
                                 echo "Can't write without a diary? Buy one!"
                             }
@@ -321,7 +321,7 @@ pipeline {
                                 if (day < 22) {
                                     echo "Don't forget to leave a kind post-it on your colleagues' desks before going on vacation! It’s a small action that can bring big smiles."
                                 } else if (day == 22) {
-                                    echo "It's not too late! Leave a kind post-it today to brighten someone’s day before your holiday."
+                                    echo "It's not too late! Leave a kind post-it today to brighten someone’s day before your holidays."
                                 } else {
                                     echo "April is almost over, but there's still time to spread kindness in another way!"
                                 }
@@ -331,7 +331,7 @@ pipeline {
                                 echo "Beautiful! You've made a bouquet of wildflowers for your parents. What a lovely gesture!"
                             } else {
                                 if (day < 20) {
-                                    echo "Don’t forget to gather wildflowers and create a bouquet for your parents before their holiday in Japan. It’s a thoughtful way to show love."
+                                    echo "Don’t forget to gather wildflowers and create a bouquet for your parents before their holidays in Japan. It’s a thoughtful way to show love."
                                 } else if (day == 20) {
                                     echo "It’s not too late! Make a bouquet today and surprise your parents with a beautiful gesture before their flight to Japan tomorrow."
                                 } else {
@@ -604,7 +604,6 @@ pipeline {
                                     echo "Have you been practicing on another instrument? Keep going, but don’t forget to get a ukulele!"
                                 } 
                                 echo "Congratulations on mastering the four chords G M, D M, E m, and C M! You're ready to play some great tunes!"
-                            
                             } else { 
                                 def completedChords = input(
                                     message: "Enter the number of chords you've mastered so far (out of 4):",
