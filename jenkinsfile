@@ -70,6 +70,13 @@ pipeline {
                             ]
                             break
 
+                        case 'August':
+                            booleanGoals = [ 
+                                booleanParam(name: "CHECKLIST", description: "Have you written your checklist?"),
+                                booleanParam(name: "FIRE", description: "Have you learnt how to do a fire?")
+                            ]
+                            break
+
                     }
     
                     if (booleanGoals) {
@@ -338,6 +345,43 @@ pipeline {
                                     echo "It's today—last chance to attend your orchestra concert!"
                                 } else {
                                     echo "It's no longer possible to attend the orchestra concert this year. Maybe next time!"
+                                }
+                            }
+                            break
+
+                        case 'August':
+
+                            if (params.CHECKLIST.toBoolean()) {
+                                if (day <= 14) {
+                                    echo "Congratulations on completing your checklist! You're all set and prepared for your trip!"
+                                } else {
+                                    echo "Hope that you found your checklist useful during the trip!"
+                                }
+                            } else {
+                                if (day < 5) {
+                                    echo "Don't forget to write your checklist! It's an important part of preparation for your trip."
+                                } else if (day == 5) {
+                                    echo "It's not too late! Write your checklist today to ensure you're fully prepared."
+                                } else if (5 < day && day < 14) {
+                                    echo "Don't forget to do your checklist—it’s a critical part of preparation for your trip!"
+                                } else {
+                                    echo "Too late for the checklist-hope you didn't forget anything..."
+                                }
+                            }
+                        
+                            if (params.FIRE.toBoolean()) {
+                                if (day <= 14) {
+                                    echo "Congratulations on learning how to make a fire! You'll stay warm under the stars during your trip!"
+                                } else {
+                                    echo "Hope you didn't freeze, and congratulations on learning a new survival skill!"
+                                }
+                            } else {
+                                if (day < 14) {
+                                    echo "Learn how to make a fire to be sure you don't freeze at night during your trip!"
+                                } else if (day == 14) {
+                                    echo "It's gonna freeze tonight!"
+                                } else {
+                                    echo "Hope you didn’t freeze too much, but at least it’s a great story to tell!"
                                 }
                             }
                             break
