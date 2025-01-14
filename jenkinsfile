@@ -55,6 +55,14 @@ pipeline {
                             ]
                             break
 
+                        case 'June':
+                            booleanGoals = [ 
+                                booleanParam(name: "RESTAURANT", description: "Have you invited your parents to the restaurant?"),
+                                booleanParam(name: "GAMES", description: "Have you spent a whole night playing games with your friends?"),
+                                booleanParam(name: "BAKING", description: "Have you spent an afternoon baking with your Grandma?")
+                            ]
+                            break
+
                     }
     
                     if (booleanGoals) {
@@ -245,6 +253,45 @@ pipeline {
                                     echo "Don’t forget to plan a road trip weekend this May! The open road is calling."
                                 } else {
                                     echo "It’s not too late! Take a road trip this weekend and enjoy the last days of May!"
+                                }
+                            }
+                            break
+
+                        case 'June':
+
+                            if (params.RESTAURANT.toBoolean()) {
+                                echo "Wonderful! You’ve invited your parents to the restaurant this June. They must have enjoyed the treat!"
+                            } else {
+                                if (day < 23) {
+                                    echo "Don’t forget to invite your parents to the restaurant this June! They’ll love spending time with you."
+                                } else if (day == 23) {
+                                    echo "It’s not too late! Take your parents to the restaurant today and make their day special."
+                                } else {
+                                    echo "June is almost over, and you haven’t invited your parents to the restaurant yet? Make time for them soon!"
+                                }
+                            }
+                        
+                            if (params.GAMES.toBoolean()) {
+                                echo "Awesome! You’ve spent a whole night playing games with your friends. Such a fun way to bond!"
+                            } else {
+                                if (day < 28) {
+                                    echo "Don’t forget to plan a games night with your friends! Laughter and fun await you."
+                                } else if (day == 28) {
+                                    echo "Last chance! Plan your games night today and enjoy an evening full of fun and laughter!"
+                                } else {
+                                    echo "It’s no longer possible to have a games night this June. Make sure to plan one soon in the future!"
+                                }
+                            }
+                        
+                            if (params.BAKING.toBoolean()) {
+                                echo "Lovely! You’ve spent an afternoon baking with your Grandma. What a sweet and memorable moment!"
+                            } else {
+                                if (day < 28) {
+                                    echo "Don’t forget to spend an afternoon baking with your Grandma! It’s a heartwarming way to bond with her."
+                                } else if (day == 28 || day == 29) {
+                                    echo "Last chance! Bake with your Grandma today and create some wonderful memories together."
+                                } else {
+                                    echo "It’s no longer possible to bake with Grandma this June. Don’t miss the chance to spend time with her next time!"
                                 }
                             }
                             break
