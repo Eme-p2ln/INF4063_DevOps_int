@@ -48,6 +48,13 @@ pipeline {
                             ]
                             break
 
+                        case 'May':
+                            booleanGoals = [ 
+                                booleanParam(name: "SUSHI", description: "Have you taken a sushi lesson with a sushi chef?"),
+                                booleanParam(name: "WEEKEND", description: "Have you been on a road trip weekend?")
+                            ]
+                            break
+
                     }
     
                     if (booleanGoals) {
@@ -77,11 +84,7 @@ pipeline {
                         case 'January':
 
                             if (params.BUY_DIARY?.toBoolean()) {
-                                if (day <= 5) {
-                                    echo "Congratulations! You've already bought your diary and you're off to a great start!"
-                                } else {
-                                    echo "Well done buying your diary! Better late than never—time to get writing!"
-                                }
+                                echo "Congratulations! You bought your diary and you're off to a great start!"
                             } else {
                                 if (day < 5) {
                                     echo "Don't forget to buy a diary! Starting early will help you achieve your January goal."
@@ -103,11 +106,7 @@ pipeline {
                         case 'February':
 
                             if (params.DECORATION_THEME?.toBoolean()) {
-                                if (day <= 5) {
-                                    echo "Congratulations on choosing your decoration theme early! You're on the right track!"
-                                } else {
-                                    echo "Great job choosing your decoration theme! A bit late, but better late than never!"
-                                }
+                                echo "Congratulations on choosing your decoration theme! You're on the right track!"
                             } else {
                                 if (day < 5) {
                                     echo "Don't forget to choose your decoration theme! It's the first step to transforming your space."
@@ -119,11 +118,7 @@ pipeline {
                             }
                       
                             if (params.DECORATION_PURCHASE?.toBoolean()) {
-                                if (day <= 15) {
-                                    echo "Well done buying your decorations! You're making great progress!"
-                                } else {
-                                    echo "Good job purchasing your decorations! It's a bit late, but you can still make it work!"
-                                }
+                                echo "Well done buying your decorations! You're making great progress!"
                             } else {
                                 if (day < 15) {
                                     echo "Don't forget to buy your decorations! Having them ready will make the process smoother."
@@ -135,11 +130,7 @@ pipeline {
                             }
                         
                             if (params.DECORATION_HOUSE?.toBoolean()) {
-                                if (day <= 25) {
-                                    echo "Amazing! Your home is looking fantastic after redecorating—great work!"
-                                } else {
-                                    echo "Congratulations on redecorating your home! A bit close to the deadline, but still a success!"
-                                }
+                                echo "Amazing! Your home is looking fantastic after redecorating—great work!"
                             } else {
                                 if (day < 25) {
                                     echo "Don't forget to start redecorating your home! The sooner you begin, the more enjoyable the result."
@@ -177,11 +168,7 @@ pipeline {
                             }
                         
                             if (params.GYM?.toBoolean()) {
-                                if (day <= 5) {
-                                    echo "Congratulations on signing up for the gym early! You're taking charge of your fitness goals!"
-                                } else {
-                                    echo "Well done signing up for the gym! A bit late, but you're on track now—time to hit those weights!"
-                                }
+                                echo "Congratulations on signing up for the gym! You're taking charge of your fitness goals!"
                             } else {
                                 if (day < 5) {
                                     echo "Don't forget to sign up for the gym! Getting started early will make all the difference for your March fitness goal."
@@ -193,11 +180,7 @@ pipeline {
                             }
                         
                             if (params.YOGA?.toBoolean()) {
-                                if (day <= 5) {
-                                    echo "Congratulations on signing up for yoga classes early! Time to find your zen and improve flexibility."
-                                } else {
-                                    echo "Great job signing up for yoga classes! A little late, but now you're ready to stretch into success!"
-                                }
+                                echo "Congratulations on signing up for yoga classes! Time to find your zen and improve flexibility."
                             } else {
                                 if (day < 5) {
                                     echo "Don't forget to sign up for yoga classes! Starting early will help you establish a routine."
@@ -218,11 +201,7 @@ pipeline {
                             }
                         
                             if (params.POST_IT?.toBoolean()) {
-                                if (day <= 22) {
-                                    echo "Wonderful! You've brightened someone's day by leaving a kind post-it. Such a thoughtful gesture!"
-                                } else {
-                                    echo "Great job putting up a kind post-it, even if it's a little late. Better late than never to spread positivity!"
-                                }
+                                echo "Wonderful! You've brightened someone's day by leaving a kind post-it. Such a thoughtful gesture!"
                             } else {
                                 if (day < 22) {
                                     echo "Don't forget to leave a kind post-it on your colleagues' desks! It’s a small action that can bring big smiles."
@@ -234,11 +213,7 @@ pipeline {
                             }
                         
                             if (params.BOUQUET?.toBoolean()) {
-                                if (day <= 20) {
-                                    echo "Beautiful! You've made a bouquet of wildflowers for your parents. What a lovely gesture!"
-                                } else {
-                                    echo "Great job making a bouquet of wildflowers for your parents, even if it's a little late. They must have loved it!"
-                                }
+                                echo "Beautiful! You've made a bouquet of wildflowers for your parents. What a lovely gesture!"
                             } else {
                                 if (day < 20) {
                                     echo "Don’t forget to gather wildflowers and create a bouquet for your parents. It’s a thoughtful way to show love."
@@ -250,7 +225,31 @@ pipeline {
                             }
                             break
 
-    
+                        case 'May':
+                            if (params.SUSHI.toBoolean()) {
+                                echo "Fantastic! You’ve taken a sushi lesson with a sushi chef. Your culinary skills are leveling up!"
+                            } else {
+                                if (day < 25) {
+                                    echo "Don’t forget to take a sushi lesson with a sushi chef! It’s a fun way to learn something new this May."
+                                } else if (day == 25) {
+                                    echo "It’s not too late! Sign up for a sushi lesson today and make your May memorable."
+                                } else {
+                                    echo "May is flying by—don’t miss the chance to take a sushi lesson with a sushi chef!"
+                                }
+                            }
+                        
+                            if (params.WEEKEND.toBoolean()) {
+                                echo "Awesome! You’ve been on a road trip weekend. What a great way to unwind and explore!"
+                            } else {
+                                if (day < 30) {
+                                    echo "Don’t forget to plan a road trip weekend this May! The open road is calling."
+                                } else {
+                                    echo "It’s not too late! Take a road trip this weekend and enjoy the last days of May!"
+                                }
+                            }
+                            break
+
+
                     }
                 }
             }
