@@ -169,28 +169,84 @@ pipeline {
                                     echo "Choosing a decoration theme is essential! Time is flying—get started soon to stay on track!"
                                 }
                             }
-                      
-                            if (params.DECORATION_PURCHASE?.toBoolean()) {
-                                echo "Well done buying your decorations! You're making great progress!"
-                            } else {
-                                if (day < 15) {
-                                    echo "Don't forget to buy your decorations! Having them ready will make the process smoother."
-                                } else if (day == 15) {
-                                    echo "It's not too late! Buy your decorations today and you're still on track."
+
+                            if (params.DECORATION_THEME?.toBoolean()) {
+                                if (params.DECORATION_PURCHASE?.toBoolean()) {
+                                    echo "Well done buying your decorations! You're making great progress!"
                                 } else {
-                                    echo "You haven't bought your decorations yet? Time to hurry—February is slipping away!"
+                                    if (day < 15) {
+                                        echo "Don't forget to buy your decorations! Having them ready will make the process smoother."
+                                    } else if (day == 15) {
+                                        echo "It's not too late! Buy your decorations today and you're still on track."
+                                    } else {
+                                        echo "You haven't bought your decorations yet? Time to hurry—February is slipping away!"
+                                    }
+                                }
+                            } else {
+                                if (params.DECORATION_PURCHASE?.toBoolean()) {
+                                    echo "Well done buying your decorations! Which theme did you choose?"
+                                } else {
+                                    if (day < 15) {
+                                        echo "Don't forget to choose a theme and buy your decorations! Having them ready will make the process smoother."
+                                    } else if (day == 15) {
+                                        echo "It's not too late! Choose your theme and buy your decorations today and you're still on track."
+                                    } else {
+                                        echo "You haven't decided your and nor bought your decorations yet? Time to hurry—February is slipping away!"
+                                    }
                                 }
                             }
-                        
-                            if (params.DECORATION_HOUSE?.toBoolean()) {
-                                echo "Amazing! Your home is looking fantastic after redecorating—great work!"
-                            } else {
-                                if (day < 25) {
-                                    echo "Don't forget to start redecorating your home! The sooner you begin, the more enjoyable the result."
-                                } else if (day == 25) {
-                                    echo "It's not too late! Start redecorating today!"
+
+                            if (params.DECORATION_THEME?.toBoolean()) {
+                                if (params.DECORATION_PURCHASE?.toBoolean()) {
+                                    if (params.DECORATION_HOUSE?.toBoolean()) {
+                                        echo "Amazing! Your home is looking fantastic after redecorating—great work!"
+                                    } else {
+                                        if (day < 25) {
+                                            echo "Don't forget to start redecorating your home! The sooner you begin, the more enjoyable the result."
+                                        } else if (day == 25) {
+                                            echo "It's not too late! Start redecorating today!"
+                                        } else {
+                                            echo "February is almost over, and your home isn't redecorated yet? Time to get moving—there's still time to make a difference!"
+                                        }
+                                    }
                                 } else {
-                                    echo "February is almost over, and your home isn't redecorated yet? Time to get moving—there's still time to make a difference!"
+                                    if (params.DECORATION_HOUSE?.toBoolean()) {
+                                        echo "Did you DIY? Your home is looking fantastic after redecorating—great work! "
+                                    } else {
+                                        if (day < 25) {
+                                            echo "Don't forget to buy the decoration and start redecorating your home! The sooner you begin, the more enjoyable the result."
+                                        } else if (day == 25) {
+                                            echo "It's not too late! Buy the decoration and start redecorating today!"
+                                        } else {
+                                            echo "February is almost over, and your home isn't redecorated yet? you haven't bought decoration neither? Time to get moving—there's still time to make a difference!"
+                                        }
+                                    }
+                                }
+                            } else {
+                                if (params.DECORATION_PURCHASE?.toBoolean()) {
+                                    if (params.DECORATION_HOUSE?.toBoolean()) {
+                                        echo "Amazing! Your home is looking fantastic after redecorating—great work! Which theme did you choose?"
+                                    } else {
+                                        if (day < 25) {
+                                            echo "Don't forget to start redecorating your home! The sooner you begin, the more enjoyable the result."
+                                        } else if (day == 25) {
+                                            echo "It's not too late! Start redecorating today!"
+                                        } else {
+                                            echo "February is almost over, and your home isn't redecorated yet? Time to get moving—there's still time to make a difference!"
+                                        }
+                                    }
+                                } else {
+                                    if (params.DECORATION_HOUSE?.toBoolean()) {
+                                        echo "Which theme did you choose? Did you DIY? Your home is looking fantastic after redecorating—great work!"
+                                    } else {
+                                        if (day < 25) {
+                                            echo "Don't forget to choose a theme, buy the decoration, and start redecorating your home! The sooner you begin, the more enjoyable the result."
+                                        } else if (day == 25) {
+                                            echo "It's not too late! Choose a theme, buy the decoration, and start redecorating today!"
+                                        } else {
+                                            echo "February is almost over, and your home isn't redecorated yet? you haven't bought decoration neither? you haven't chosen your theme?? Time to get moving—there's still time to make a difference!"
+                                        }
+                                    }
                                 }
                             }
 
