@@ -77,6 +77,13 @@ pipeline {
                             ]
                             break
 
+                        case 'September':
+                            booleanGoals = [ 
+                                booleanParam(name: "DOLOMITES", description: "Have you hiked in the Swiss Dolomites?"),
+                                booleanParam(name: "PICO_RUIVO", description: "Have you climbed Pico Ruivo in Madeira?")
+                            ]
+                            break
+
                     }
     
                     if (booleanGoals) {
@@ -99,7 +106,6 @@ pipeline {
                                  day % 10 == 3 && day != 13 ? "rd" : "th"
 
                     echo "Checking goals for ${params.MONTH}, ${day}${suffix}..."
-                    sleep(5)
 
                     switch (params.MONTH) {
 
@@ -226,11 +232,11 @@ pipeline {
                                 echo "Wonderful! You've brightened someone's day by leaving a kind post-it. Such a thoughtful gesture!"
                             } else {
                                 if (day < 22) {
-                                    echo "Don't forget to leave a kind post-it on your colleagues' desks! It’s a small action that can bring big smiles."
+                                    echo "Don't forget to leave a kind post-it on your colleagues' desks before going on vacation! It’s a small action that can bring big smiles."
                                 } else if (day == 22) {
-                                    echo "It's not too late! Leave a kind post-it today to brighten someone’s day."
+                                    echo "It's not too late! Leave a kind post-it today to brighten someone’s day before your holiday."
                                 } else {
-                                    echo "April is almost over, but there's still time to spread kindness with a post-it note!"
+                                    echo "April is almost over, but there's still time to spread kindness in another way!"
                                 }
                             }
                         
@@ -238,25 +244,26 @@ pipeline {
                                 echo "Beautiful! You've made a bouquet of wildflowers for your parents. What a lovely gesture!"
                             } else {
                                 if (day < 20) {
-                                    echo "Don’t forget to gather wildflowers and create a bouquet for your parents. It’s a thoughtful way to show love."
+                                    echo "Don’t forget to gather wildflowers and create a bouquet for your parents before their holiday in Japan. It’s a thoughtful way to show love."
                                 } else if (day == 20) {
-                                    echo "It’s not too late! Make a bouquet today and surprise your parents with a beautiful gesture."
+                                    echo "It’s not too late! Make a bouquet today and surprise your parents with a beautiful gesture before their flight to Japan tomorrow."
                                 } else {
-                                    echo "The month is nearly over—don’t miss the chance to make a bouquet of wildflowers for your parents!"
+                                    echo "The month is nearly over and your parents went on vacation—don’t miss the chance to make a bouquet of wildflowers for your Grandma instead!"
                                 }
                             }
                             break
 
                         case 'May':
+
                             if (params.SUSHI.toBoolean()) {
                                 echo "Fantastic! You’ve taken a sushi lesson with a sushi chef. Your culinary skills are leveling up!"
                             } else {
                                 if (day < 25) {
-                                    echo "Don’t forget to take a sushi lesson with a sushi chef! It’s a fun way to learn something new this May."
+                                    echo "Don’t forget to take a sushi lesson with a sushi chef before he returns to Japan! It’s a fun way to learn something new this May."
                                 } else if (day == 25) {
-                                    echo "It’s not too late! Sign up for a sushi lesson today and make your May memorable."
+                                    echo "It’s not too late! Sign up for a sushi lesson with a sushi chef today (before he returns to Japan) and make your May memorable."
                                 } else {
-                                    echo "May is flying by—don’t miss the chance to take a sushi lesson with a sushi chef!"
+                                    echo "May is flying by and the sushi chef returned to Japan—don’t miss the chance to take another cooking lesson!"
                                 }
                             }
                         
@@ -277,11 +284,11 @@ pipeline {
                                 echo "Wonderful! You’ve invited your parents to the restaurant this June. They must have enjoyed the treat!"
                             } else {
                                 if (day < 23) {
-                                    echo "Don’t forget to invite your parents to the restaurant this June! They’ll love spending time with you."
+                                    echo "Don’t forget to invite your parents to the restaurant this June before their trip to Brazil! They’ll love spending time with you."
                                 } else if (day == 23) {
-                                    echo "It’s not too late! Take your parents to the restaurant today and make their day special."
+                                    echo "It’s not too late! Take your parents to the restaurant today and make their last day before their trip to Brazil special."
                                 } else {
-                                    echo "June is almost over, and you haven’t invited your parents to the restaurant yet? Make time for them soon!"
+                                    echo "June is almost over, your parents are enjoying Brazil, and you haven’t invited them to the restaurant? Make time for them another time!"
                                 }
                             }
                         
@@ -386,7 +393,46 @@ pipeline {
                             }
                             break
 
+                        case 'September':
 
+                            if (params.DOLOMITES.toBoolean()) {
+                                if (day < 10) {
+                                    echo "Holidays are coming! Congratulations for planning your Swiss Dolomites hike in advance! You're well-prepared!"
+                                } else if (day >= 10 && day <= 15) {
+                                    echo "Have fun hiking in the Swiss Dolomites! Enjoy the breathtaking views!"
+                                } else {
+                                    echo "Hope you had an unforgettable experience hiking in the Swiss Dolomites!"
+                                }
+                            } else {
+                                if (day < 10) {
+                                    echo "Holidays are coming! Don't forget to plan your hike in the Swiss Dolomites! The adventure awaits!"
+                                } else if (day >= 10 && day <= 15) {
+                                    echo "It's the perfect time to hike in the Swiss Dolomites—don't miss this opportunity!"
+                                } else {
+                                    echo "It's no longer possible to hike in the Swiss Dolomites-your vacation are over. Maybe next time!"
+                                }
+                            }
+                        
+                            if (params.PICO_RUIVO.toBoolean()) {
+                                if (day < 19) {
+                                    echo "Holidays are coming! Congratulations for planning your Pico Ruivo climb in advance! You're all set for an amazing adventure!"
+                                } else if (day >= 19 && day <= 26) {
+                                    echo "Enjoy your climb to Pico Ruivo! The views from Madeira's highest peak will be worth it!"
+                                } else {
+                                    echo "Hope you had an incredible experience climbing Pico Ruivo!"
+                                }
+                            } else {
+                                if (day < 19) {
+                                    echo "Holidays are coming! Don't forget to plan your climb to Pico Ruivo! It's an adventure you won't want to miss."
+                                } else if (day >= 19 && day <= 26) {
+                                    echo "It's the perfect time to climb Pico Ruivo—make sure you don't miss out!"
+                                } else {
+                                    echo "It's no longer possible to climb Pico Ruivo-your vacation are over. Maybe next time!"
+                                }
+                            }
+                            break
+
+    
                     }
                 }
             }
