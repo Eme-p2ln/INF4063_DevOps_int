@@ -191,7 +191,7 @@ pipeline {
                                     } else if (day == 15) {
                                         echo "It's not too late! Choose your theme and buy your decorations today and you're still on track."
                                     } else {
-                                        echo "You haven't decided your and nor bought your decorations yet? Time to hurry—February is slipping away!"
+                                        echo "You haven't decided your theme nor bought your decorations yet? Time to hurry—February is slipping away!"
                                     }
                                 }
                             }
