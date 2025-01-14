@@ -199,7 +199,7 @@ pipeline {
                                 def totalDistance = 20
                                 def progress = (completedDistance / totalDistance) * 100
                                 echo "Progress: ${progressBar(progress as int)}"
-                                if (progress != '0'){
+                                if (0 != progress){
                                     echo "You're on your way to completing the 20 km goal! Keep running—March isn't over yet!"
                                 } else {
                                     echo "It's not too late to start! Motivation is the key."
