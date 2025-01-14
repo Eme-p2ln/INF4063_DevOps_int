@@ -137,10 +137,14 @@ pipeline {
                                 }
                             }
 
-                            if (params.QUOTE?.toBoolean()) {
+                            if (params.QUOTE?.toBoolean() && params.BUY_DIARY?.toBoolean()) {
                                 echo "Great job writing a quote that reflects your mood today! It's a beautiful way to connect with your emotions and express yourself."
-                            } else {
+                            } else if (!params.QUOTE?.toBoolean() && params.BUY_DIARY?.toBoolean()) {
                                 echo "Remember to write a quote that matches your mood today! It's a small yet meaningful step to bring clarity to your thoughts and emotions."
+                            } else if (params.QUOTE?.toBoolean() && !params.BUY_DIARY?.toBoolean()) {
+                                echo "Did you write on a random paper? Writing is the most important so don't give up!"
+                            } else {
+                                echo "Can't write without a diary? Buy one!"
                             }
                           
                             break
@@ -523,17 +527,14 @@ pipeline {
                             }
                         
                             if (params.CHORDS?.toBoolean()) {
-                                if (!params.UKULELE?.toBoolean()) {
-                                    echo "Have you been practicing on another instrument? Keep going, but don’t forget to get a ukulele!"
-                                } 
                                 def progress = 100
                                 echo "Chords: ${progressBar(progress)}"
-                                echo "Congratulations on mastering the four chords G M, D M, E m, and C M! You're ready to play some great tunes!"
-                            
-                            } else {
                                 if (!params.UKULELE?.toBoolean()) {
                                     echo "Have you been practicing on another instrument? Keep going, but don’t forget to get a ukulele!"
                                 } 
+                                echo "Congratulations on mastering the four chords G M, D M, E m, and C M! You're ready to play some great tunes!"
+                            
+                            } else { 
                                 def completedChords = input(
                                     message: "Enter the number of chords you've mastered so far (out of 4):",
                                     parameters: [
@@ -545,8 +546,10 @@ pipeline {
                                 echo "Progress: ${progressBar(progress as int)}"
                                 if (0 != progress){
                                     echo "You're on your way to mastering the chords! Keep practicing—it’s all about consistency."
+                                } else if (progress == 0 && !params.UKULELE?.toBoolean()){
+                                    echo "Have you been practicing on another instrument? Keep going, but don’t forget to get a ukulele! It's not too late to start! Motivation is the key."
                                 } else {
-                                    echo "It's not too late to start! Motivation is the key."
+                                    echo "Can't start without a ukulele? Buy one!"
                                 }
                                 
                             }
