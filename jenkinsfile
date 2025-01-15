@@ -607,7 +607,7 @@ pipeline {
                             def progress = 0
 
                             if (params.CHORDS?.toBoolean()) {
-                                def progress = 100
+                                progress = 100
                                 echo "Chords: ${progressBar(progress)}"
                                 if (!params.UKULELE?.toBoolean()) {
                                     echo "Have you been practicing on another instrument? Keep going, but don’t forget to get a ukulele!"
@@ -622,11 +622,11 @@ pipeline {
                                         ]
                                     ) as int
                                     def totalChords = 4
-                                    def progress = (completedChords / totalChords) * 100
+                                    progress = (completedChords / totalChords) * 100
                                     echo "Chords: ${progressBar(progress as int)}"
                                 } else {
                                     def totalChords = 4
-                                    def progress = (0 / totalChords) * 100
+                                    progress = (0 / totalChords) * 100
                                     echo "Chords: ${progressBar(progress as int)}"
                                 }
                                 if (0 != progress && params.UKULELE?.toBoolean()){
@@ -638,7 +638,6 @@ pipeline {
                                 } else {
                                     echo "Can't start without a ukulele? Buy one!"
                                 }
-                                
                             }
                         
                             break
