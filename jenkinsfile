@@ -604,7 +604,8 @@ pipeline {
                                 def empty = " " * (10 - (progress / 10 as int))
                                 return "|${filled}${empty}| ${progress}%"
                             }
-                        
+                            def progress = 0
+
                             if (params.CHORDS?.toBoolean()) {
                                 def progress = 100
                                 echo "Chords: ${progressBar(progress)}"
