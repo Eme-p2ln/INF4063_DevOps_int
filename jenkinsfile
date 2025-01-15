@@ -343,7 +343,7 @@ pipeline {
 
                         case 'May':
 
-                            if (params.SUSHI.toBoolean()) {
+                            if (params.SUSHI?.toBoolean()) {
                                 echo "Fantastic! You’ve taken a sushi lesson with a sushi chef. Your culinary skills are leveling up!"
                             } else {
                                 if (day < 25) {
@@ -355,7 +355,7 @@ pipeline {
                                 }
                             }
                         
-                            if (params.WEEKEND.toBoolean()) {
+                            if (params.WEEKEND?.toBoolean()) {
                                 echo "Awesome! You’ve been on a road trip weekend. What a great way to unwind and explore!"
                             } else {
                                 if (day < 30) {
@@ -369,7 +369,7 @@ pipeline {
 
                         case 'June':
 
-                            if (params.RESTAURANT.toBoolean()) {
+                            if (params.RESTAURANT?.toBoolean()) {
                                 echo "Wonderful! You’ve invited your parents to the restaurant this June. They must have enjoyed the treat!"
                             } else {
                                 if (day < 23) {
@@ -381,7 +381,7 @@ pipeline {
                                 }
                             }
                         
-                            if (params.GAMES.toBoolean()) {
+                            if (params.GAMES?.toBoolean()) {
                                 echo "Awesome! You’ve spent a whole night playing games with your friends. Such a fun way to bond!"
                             } else {
                                 if (day < 28) {
@@ -393,7 +393,7 @@ pipeline {
                                 }
                             }
                         
-                            if (params.BAKING.toBoolean()) {
+                            if (params.BAKING?.toBoolean()) {
                                 echo "Lovely! You’ve spent an afternoon baking with your Grandma. What a sweet and memorable moment!"
                             } else {
                                 if (day < 28) {
@@ -409,7 +409,7 @@ pipeline {
 
                         case 'July':
 
-                            if (params.VIEILLES_CHARRUES.toBoolean()) {
+                            if (params.VIEILLES_CHARRUES?.toBoolean()) {
                                 if (day < 17) {
                                     echo "Congratulations for reserving your place in advance for Les Vieilles Charrues!"
                                 } else if (day == 17) {
@@ -427,7 +427,7 @@ pipeline {
                                 }
                             }
                         
-                            if (params.ORCHESTRA_CONCERT.toBoolean()) {
+                            if (params.ORCHESTRA_CONCERT?.toBoolean()) {
                                 if (day < 6) {
                                     echo "Congratulations for reserving your place in advance for your old orchestra concert!"
                                 } else if (day == 6) {
@@ -449,7 +449,7 @@ pipeline {
 
                         case 'August':
 
-                            if (params.CHECKLIST.toBoolean()) {
+                            if (params.CHECKLIST?.toBoolean()) {
                                 if (day <= 14) {
                                     echo "Congratulations on completing your checklist! You're all set and prepared for your trip!"
                                 } else {
@@ -467,7 +467,7 @@ pipeline {
                                 }
                             }
                         
-                            if (params.FIRE.toBoolean()) {
+                            if (params.FIRE?.toBoolean()) {
                                 if (day <= 14) {
                                     echo "Congratulations on learning how to make a fire! You'll stay warm under the stars during your trip!"
                                 } else {
@@ -487,7 +487,7 @@ pipeline {
 
                         case 'September':
 
-                            if (params.DOLOMITES.toBoolean()) {
+                            if (params.DOLOMITES?.toBoolean()) {
                                 if (day < 10) {
                                     echo "Holidays are coming! Congratulations for planning your Swiss Dolomites hike in advance! You're well-prepared!"
                                 } else if (day >= 10 && day <= 15) {
@@ -505,7 +505,7 @@ pipeline {
                                 }
                             }
                         
-                            if (params.PICO_RUIVO.toBoolean()) {
+                            if (params.PICO_RUIVO?.toBoolean()) {
                                 if (day < 19) {
                                     echo "Holidays are coming! Congratulations for planning your Pico Ruivo climb in advance! You're all set for an amazing adventure!"
                                 } else if (day >= 19 && day <= 26) {
@@ -613,7 +613,7 @@ pipeline {
                                 ) as int
                                 def totalChords = 4
                                 def progress = (completedChords / totalChords) * 100
-                                echo "Progress: ${progressBar(progress as int)}"
+                                echo "Chords: ${progressBar(progress as int)}"
                                 if (0 != progress && params.UKULELE?.toBoolean()){
                                     echo "You're on your way to mastering the chords! Keep practicing—it’s all about consistency."
                                 } else if (0 != progress && !params.UKULELE?.toBoolean()){
