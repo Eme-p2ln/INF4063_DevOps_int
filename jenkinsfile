@@ -130,6 +130,7 @@ pipeline {
 
                     switch (params.MONTH) {
 
+                        // 2nd parameter dependent on 1st
                         case 'January':
 
                             if (params.BUY_DIARY?.toBoolean()) {
@@ -156,6 +157,8 @@ pipeline {
                           
                             break
 
+                        // 2nd parameter dependent on 1st
+                        // 3rd parameter dependent on 1st and 2nd
                         case 'February':
 
                             if (params.DECORATION_THEME?.toBoolean()) {
@@ -252,6 +255,7 @@ pipeline {
 
                             break
 
+                        // 2nd parameter progression format throughout the month
                         case 'March':
 
                             def progressBar = { progress ->
@@ -407,6 +411,7 @@ pipeline {
 
                             break
 
+                        // validity period for both parameters
                         case 'July':
 
                             if (params.VIEILLES_CHARRUES?.toBoolean()) {
@@ -485,6 +490,7 @@ pipeline {
 
                             break
 
+                        // validity period for both parameters
                         case 'September':
 
                             if (params.DOLOMITES?.toBoolean()) {
@@ -525,6 +531,7 @@ pipeline {
 
                             break
 
+                        // both parameters progression format throughout the month
                         case 'October':
                         
                             def progressBar = { progress ->
@@ -577,6 +584,7 @@ pipeline {
                         
                             break
 
+                        // 2nd parameter dependent on 1st + progression format throughout the month
                         case 'November':
 
                             if (params.UKULELE?.toBoolean()) {
